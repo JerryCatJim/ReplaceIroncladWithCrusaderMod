@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dfv2vjskaebuq"]
+
+[ext_resource type="Shader" uid="uid://ber4508pp8ntr" path="res://crusader_assets/Shader/burn_banner_up_to_down_shader.gdshader" id="1_rfl75"]
+[ext_resource type="Texture2D" uid="uid://civ6koaiigcrw" path="res://crusader_assets/Shader/burn_banner_texture_1d.tres" id="2_rfl75"]
+[ext_resource type="Texture2D" uid="uid://ceh2182n1obyg" path="res://crusader_assets/Texture/tex_crusader_wpn_banner_col.png" id="3_esxep"]
+[ext_resource type="Texture2D" uid="uid://c4u0rk5k1dmck" path="res://crusader_assets/Texture/tex_crusader_wpn_banner_ink.png" id="4_3oap5"]
+[ext_resource type="Texture2D" uid="uid://bfg8r02iq6w5v" path="res://crusader_assets/Shader/burn_noise_texture_2d.tres" id="5_wg7rn"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_rfl75")
+shader_parameter/col_texture = ExtResource("3_esxep")
+shader_parameter/ink_texture = ExtResource("4_3oap5")
+shader_parameter/noise_texture = ExtResource("5_wg7rn")
+shader_parameter/burn_texture = ExtResource("2_rfl75")
+shader_parameter/rim_amount = 1.0
+shader_parameter/rim_tint_value = 0.0
+shader_parameter/dissolve_value = 0.0
+shader_parameter/burn_size = 0.2000000095
+shader_parameter/burn_intensity = 5.0
+shader_parameter/glow_color = Color(1, 0.85, 0.25, 1)
+shader_parameter/brightness = 0.0
+shader_parameter/brightness_radius = 1.00000004424012
+shader_parameter/glow_center = Vector3(0, 2.2, 1.4)
+shader_parameter/burn_axis = Vector3(0, 1, 0)
+shader_parameter/model_length = 2.0
+shader_parameter/model_offset = 1.0

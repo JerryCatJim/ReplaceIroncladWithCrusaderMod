@@ -1,0 +1,25 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://bil83oc5ocyro"]
+
+[sub_resource type="Curve" id="Curve_olwfe"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1.5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r4c63"]
+curve = SubResource("Curve_olwfe")
+
+[resource]
+emission_shape = 3
+emission_box_extents = Vector3(0, 0, 0.35)
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(1, 0, -1)
+spread = 15.0
+initial_velocity_min = 0.099999994
+initial_velocity_max = 0.099999994
+gravity = Vector3(0, 0, 0)
+scale_min = 0.08
+scale_max = 0.14999999
+scale_curve = SubResource("CurveTexture_r4c63")
+anim_speed_min = 0.19999999
+anim_speed_max = 0.25

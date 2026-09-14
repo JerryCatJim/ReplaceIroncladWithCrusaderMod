@@ -1,0 +1,11 @@
+shader_type spatial;
+render_mode unshaded, cull_front; // cull_front 是关键
+uniform float thickness = 0.0065;
+
+void vertex() {
+    VERTEX += NORMAL * thickness; // 控制描边粗细
+}
+
+void fragment() {
+    ALBEDO = vec3(0.0); // 纯黑
+}

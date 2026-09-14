@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://t6fabf4pcleb"]
+
+[ext_resource type="Shader" uid="uid://cuqa4bcixn8c8" path="res://crusader_assets/Shader/self_glow.gdshader" id="1_o80mp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o80mp"]
+shader = ExtResource("1_o80mp")
+shader_parameter/aspect = 1.0
+shader_parameter/global_intensity = 1.0
+shader_parameter/core_color = Color(1, 0.97, 0.88, 1)
+shader_parameter/core_size = 0.1
+shader_parameter/core_power = 3.0
+shader_parameter/core_intensity = 2.5
+shader_parameter/halo_color = Color(1, 0.69, 0.35, 1)
+shader_parameter/halo_size = 0.5
+shader_parameter/halo_power = 2.5
+shader_parameter/halo_intensity = 0.8
+shader_parameter/ray_color = Color(1, 0.82, 0.5, 1)
+shader_parameter/ray_count = 14
+shader_parameter/ray_intensity = 0.7
+shader_parameter/ray_length = 0.55
+shader_parameter/ray_power = 2.5
+shader_parameter/ray_sharpness = 0.55
+shader_parameter/ray_speed = 0.06
+shader_parameter/ray_inner_fade = 0.12
+
+[sub_resource type="Animation" id="Animation_o80mp"]
+resource_name = "empty"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/global_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0000000475, 1.0000000475, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqhp6"]
+_data = {
+&"Show": SubResource("Animation_o80mp")
+}
+
+[node name="SelfGlow" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_o80mp")
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+pivot_offset = Vector2(0.5, 0.5)
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../ColorRect")
+libraries = {
+&"": SubResource("AnimationLibrary_tqhp6")
+}

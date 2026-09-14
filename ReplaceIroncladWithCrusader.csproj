@@ -1,0 +1,52 @@
+﻿<Project Sdk="Godot.NET.Sdk/4.5.1">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+	<GodotExe>E:\GodotEngine_4.5.1_stable\Godot_v4.5.1-stable_mono_win64.exe</GodotExe>
+	<Sts2Dir>E:\Steam\steamapps\common\Slay the Spire 2</Sts2Dir>
+  </PropertyGroup>
+	<PropertyGroup>
+		<AssemblyVersion>0.0.1</AssemblyVersion>
+		<FileVersion>0.0.1</FileVersion>
+		<Version>0.0.1</Version>
+	</PropertyGroup>
+  <ItemGroup>
+    <Content Include="CrusaderConfig.json" />
+    <Content Include="ReplaceIroncladWithCrusader_Template.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="GodotSharp">
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\GodotSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="sts2">
+      <HintPath>..\..\Steam\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll</HintPath>
+    </Reference>
+    <Folder Include="ReplaceIroncladWithCrusader\Code\Audio\" />
+  </ItemGroup>
+	<!-- .csproj 中添加 AssemblyMetadata -->
+	<ItemGroup>
+		<!-- 禁用 BaseLib / ModConfig 的镜像设置页，避免重复 -->
+		<!--AssemblyMetadata Include="RitsuLib.ModSettingsMirror.Mod.Test.DisableSources" Value="baselib,modconfig" /-->
+		<AssemblyMetadata Include="RitsuLib.ModSettingsInterop.ProviderType" Value="ReplaceIroncladWithCrusader.Code.ModConfig.RitsuLibModConfig" />
+	</ItemGroup>
+	<Target Name="GenerateModJson" BeforeTargets="CopyToModsFolderOnBuild">
+		<ReadLinesFromFile File="ReplaceIroncladWithCrusader_Template.json">
+			<Output TaskParameter="Lines" ItemName="JsonLines" />
+		</ReadLinesFromFile>
+		<WriteLinesToFile File="ReplaceIroncladWithCrusader.json" Lines="@(JsonLines-&gt;Replace('$VERSION$', '$(Version)'))" Overwrite="true" />
+	</Target>
+	<Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
+		<Message Text="Copying .dll and manifest to mods folder." Importance="high" />
+		<Copy SourceFiles="CrusaderConfig.json" DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)" />
+		<Copy SourceFiles="ReplaceIroncladWithCrusader.json" DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)" />
+	</Target>
+	<Target Name="ExportPck" AfterTargets="Publish">
+		<Message Text="Copying PCK to Slay the Spire 2 mods folder..." Importance="high" />
+		<Exec Command="&quot;$(GodotExe)&quot; --headless --export-pack &quot;BasicExport&quot; &quot;$(Sts2Dir)/mods/$(MSBuildProjectName)/$(MSBuildProjectName).pck&quot;" EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1" ContinueOnError="WarnAndContinue" />
+	</Target>
+</Project>

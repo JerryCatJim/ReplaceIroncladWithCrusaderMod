@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://eo5f7wbs6cdo"]
+
+[ext_resource type="Texture2D" uid="uid://ceh2182n1obyg" path="res://crusader_assets/Texture/tex_crusader_wpn_banner_col.png" id="1_4wst0"]
+[ext_resource type="Material" uid="uid://vq6jotwtska0" path="res://crusader_assets/Shader/ShadowLine.tres" id="2_d5ks2"]
+[ext_resource type="Texture2D" uid="uid://c4u0rk5k1dmck" path="res://crusader_assets/Texture/tex_crusader_wpn_banner_ink.png" id="2_fm35l"]
+
+[resource]
+next_pass = ExtResource("2_d5ks2")
+albedo_texture = ExtResource("1_4wst0")
+rim_enabled = true
+rim_texture = ExtResource("2_fm35l")

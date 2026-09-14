@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://oa5iw1usm8l5"]
+
+[ext_resource type="Shader" uid="uid://b4tu7rjiandus" path="res://crusader_assets/Shader/burn_scripture_down_to_up_shader.gdshader" id="2_32q8u"]
+[ext_resource type="Texture2D" uid="uid://cj5k8aq3qerue" path="res://crusader_assets/Texture/tex_crusader_wpn_scripture_col.png" id="2_h1frh"]
+[ext_resource type="Texture2D" uid="uid://qxgayfsfo8kr" path="res://crusader_assets/Shader/burn_scripture_texture_1d.tres" id="3_6kl0j"]
+[ext_resource type="Texture2D" uid="uid://bfg8r02iq6w5v" path="res://crusader_assets/Shader/burn_noise_texture_2d.tres" id="3_32q8u"]
+[ext_resource type="Texture2D" uid="uid://bjsitlt3dikhs" path="res://crusader_assets/Texture/tex_crusader_wpn_scripture_ink.png" id="4_6kl0j"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("2_32q8u")
+shader_parameter/col_texture = ExtResource("2_h1frh")
+shader_parameter/ink_texture = ExtResource("4_6kl0j")
+shader_parameter/noise_texture = ExtResource("3_32q8u")
+shader_parameter/burn_texture = ExtResource("3_6kl0j")
+shader_parameter/rim_amount = 1.0
+shader_parameter/rim_tint_value = 0.0
+shader_parameter/dissolve_value = 0.0
+shader_parameter/burn_size = 0.0
+shader_parameter/burn_intensity = 0.0
+shader_parameter/glow_color = Color(1, 0.85, 0.25, 1)
+shader_parameter/brightness = 0.0
+shader_parameter/brightness_radius = 1.00000004424012
+shader_parameter/glow_center = Vector3(0.5, 2, 0)
+shader_parameter/burn_axis = Vector3(-0.5, 0, 1)
+shader_parameter/model_length = 1.2
+shader_parameter/model_offset = 0.65
