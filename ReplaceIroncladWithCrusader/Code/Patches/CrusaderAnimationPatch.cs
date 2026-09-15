@@ -224,7 +224,7 @@ public class ReplaceIroncladWithCrusaderOnSelectedPatch
     {
         if (!CrusaderSettings.ShowCardAnims) return;
 
-        if (CrusaderHelper.IsIronclad(cardModel.Owner))
+        if (cardModel != null && CrusaderHelper.IsIronclad(cardModel.Owner))
         {
             string animName = CrusaderConfigLoader.GetValueAsString(cardModel.Id.Entry);
             if (!string.IsNullOrEmpty(animName))
@@ -295,7 +295,7 @@ public class ReplaceIroncladWithCrusaderCancelPlayCardPatch
         if (!GodotObject.IsInstanceValid(__instance)) return;
 
         CardModel Card = Traverse.Create(__instance).Property("Card").GetValue<CardModel>();
-        if (!CrusaderHelper.IsIronclad(Card.Owner)) return;
+        if (Card == null || !CrusaderHelper.IsIronclad(Card.Owner)) return;
 
         #region FixPowerCardPlayedTravelToIdle
         //发现PowerCard在打出时会先停顿一小会再播放打出动画(Attack和Skill倒是会立刻播放，但其实也经历了Travel到Idle的过程，只不过随后又立刻切换了)。
@@ -337,7 +337,7 @@ public class ReplaceIroncladWithCrusaderOnCreatureUnhoverPatch
         if (__instance is not NControllerCardPlay) return;
 
         CardModel Card = Traverse.Create(__instance).Property("Card").GetValue<CardModel>();
-        if (!CrusaderHelper.IsIronclad(Card.Owner)) return;
+        if (Card == null || !CrusaderHelper.IsIronclad(Card.Owner)) return;
 
         CreatureCmd.TriggerAnim(Card.Owner.Creature, "Idle", 0);
     }

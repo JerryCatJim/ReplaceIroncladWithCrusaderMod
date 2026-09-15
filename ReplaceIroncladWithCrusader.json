@@ -3,7 +3,7 @@
 "name": "ReplaceIroncladWithCrusader",
 "author": "Jerry",
 "description": "Replace Ironclad With Crusader.",
-"version": "0.0.3",
+"version": "0.0.4",
 "has_pck": true,
 "has_dll": true,
 "min_game_version": "0.107.0",
