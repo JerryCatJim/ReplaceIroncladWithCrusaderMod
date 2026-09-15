@@ -7,7 +7,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Multiplayer.Game.PeerInput;
 using MegaCrit.Sts2.Core.Nodes.Combat;
@@ -34,6 +33,8 @@ public static class CrusaderAnimationPatch
                 PlayAnim(__instance, "Hit", true);
                 break;
 
+            case "":
+            case null:
             case "Attack":  //攻击卡牌在attackcmd里默认赋值trigger为attack,所以传入的是attack的话什么也不做
             case "Cast":    //原版角色的施法动作
             case "PowerUp": //原版角色某些卡牌动作
@@ -82,9 +83,7 @@ public static class CrusaderAnimationPatch
         //根据当前血量和灾厄的关系决定播放哪种Idle和Hit动画
         CrusaderHelper.ResetAdvancedConditions(animTree, node.Entity);
 
-        var state_machine = (AnimationNodeStateMachinePlayback)animTree.Get("parameters/playback");
-        AnimationNodeStateMachine rootStateMachine = animTree.TreeRoot as AnimationNodeStateMachine;
-
+        var state_machine = animTree.Get("parameters/playback").As<AnimationNodeStateMachinePlayback>();
         if (state_machine != null)
         {
             #region FixIdleAnimTravel
@@ -118,6 +117,7 @@ public static class CrusaderAnimationPatch
             if (!bHasChildStateMachine)
             {
                 //检测到状态机中不存在的结点(例如使用了属于其他角色卡池的卡牌而触发动画时)则什么也不做
+                AnimationNodeStateMachine rootStateMachine = animTree.TreeRoot as AnimationNodeStateMachine;
                 if (rootStateMachine == null || !rootStateMachine.HasNode(animName)) return;
 
                 if (animName == "Hit")
@@ -148,6 +148,8 @@ public static class CrusaderAnimationPatch
                     if (AR_SM != null)
                     {
                         string cardAnimName = animName.Replace("CardSelect/", "");
+                        if (!CrusaderHelper.CanTravelTo(cardAnimName)) return;
+
                         if (!string.IsNullOrEmpty(cardAnimName) && cardAnimName != "DoNothing")
                         {
                             //必须用Start立刻传送，否则在上一张牌动画Recover阶段没结束时迅速选择下一张牌，动画会无法正确播放
@@ -170,6 +172,7 @@ public static class CrusaderAnimationPatch
                     if (Attack_SM != null)
                     {
                         string cardAnimName = animName.Replace("CardPlay/", "");
+                        if (!CrusaderHelper.CanTravelTo(cardAnimName)) return;
 
                         //不要重复链接
                         if (!Attack_SM.IsConnected("state_started", _stateStartedCallable))

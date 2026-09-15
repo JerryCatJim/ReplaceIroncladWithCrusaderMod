@@ -237,4 +237,25 @@ public static class CrusaderHelper
         }
         return offSetY;
     }
+    public static bool CanTravelTo(string nodeName)
+    {
+        switch (nodeName)
+        {
+            case "Smite":
+            case "Stun":
+            case "Accus":
+            case "CardSelect/Heal":
+            case "Insp":
+            case "Rally":
+            case "Tenacity":
+            case "Reap":
+            case "Bulwark":
+            case "Radiance":
+            case "Holy":
+            case "Mercy":
+                return true;
+            default:
+                return false;
+        }
+    }
 }
