@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Logging;
 using ReplaceIroncladWithCrusader.Code.Config;
 using ReplaceIroncladWithCrusader.Code.Helper;
 using System.Threading.Tasks;
@@ -15,7 +16,8 @@ public class CrusaderCombatSingleton : CustomCrusaderSingletonModel
     }
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (cardPlay != null && cardPlay.Player != null && CrusaderHelper.IsCardOfIronclad(cardPlay.Card) && CrusaderHelper.IsIronclad(cardPlay.Player))
+        //Card.Owner在111版本可以换成Card.Player吗？
+        if (cardPlay != null && cardPlay.Card.Owner != null && CrusaderHelper.IsIronclad(cardPlay.Card.Owner))
         {
             string animName = CrusaderConfigLoader.GetValueAsString(cardPlay.Card.Id.Entry);
             if (!string.IsNullOrEmpty(animName))

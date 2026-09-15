@@ -128,7 +128,7 @@ public static class CrusaderAnimationPatch
                         return;
                     }
                     //若处于任意Idle时则平滑切换
-                    playImmediately = !CrusaderHelper.IsInAnyIdle(animTree, node.Entity);
+                    //playImmediately = !CrusaderHelper.IsInAnyIdle(animTree, node.Entity);
                     animName = CrusaderHelper.IsLowHealth(node.Entity) && CrusaderSettings.UseLowHealthIdle ? "DeathDoor" : animName;
                 }
                 if (playImmediately)
@@ -224,7 +224,7 @@ public class ReplaceIroncladWithCrusaderOnSelectedPatch
     {
         if (!CrusaderSettings.ShowCardAnims) return;
 
-        if (CrusaderHelper.IsCardOfIronclad(cardModel) && CrusaderHelper.IsIronclad(cardModel.Owner))
+        if (CrusaderHelper.IsIronclad(cardModel.Owner))
         {
             string animName = CrusaderConfigLoader.GetValueAsString(cardModel.Id.Entry);
             if (!string.IsNullOrEmpty(animName))
@@ -251,12 +251,11 @@ public static class ReplaceIroncladWithCrusaderOnCardSelectedPatch
         if (CardIntent != null && CardIntent.Card != null && CardIntent.Visible)
         {
             CardModel cardModel = CardIntent.Card;
-            if (cardModel != null && cardModel.Owner != null && cardModel.Pool is IroncladCardPool 
-                && !string.IsNullOrEmpty(CrusaderConfigLoader.GetValueAsString(cardModel.Id.Entry)))
+            if (cardModel != null && !string.IsNullOrEmpty(CrusaderConfigLoader.GetValueAsString(cardModel.Id.Entry)))
             {
-                CreatureCmd.TriggerAnim(cardModel.Owner.Creature, "CardSelect/" + CrusaderConfigLoader.GetValueAsString(cardModel.Id.Entry), 0);
+                CreatureCmd.TriggerAnim(CurrentPlayer.Creature, "CardSelect/" + CrusaderConfigLoader.GetValueAsString(cardModel.Id.Entry), 0);
             }
-            else  //选中非战士卡池的卡
+            else  //选中非配置的卡
             {
                 CreatureCmd.TriggerAnim(CurrentPlayer.Creature, "Idle", 0);
             }
@@ -296,7 +295,7 @@ public class ReplaceIroncladWithCrusaderCancelPlayCardPatch
         if (!GodotObject.IsInstanceValid(__instance)) return;
 
         CardModel Card = Traverse.Create(__instance).Property("Card").GetValue<CardModel>();
-        if (!CrusaderHelper.IsCardOfIronclad(Card) || !CrusaderHelper.IsIronclad(Card.Owner)) return;
+        if (!CrusaderHelper.IsIronclad(Card.Owner)) return;
 
         #region FixPowerCardPlayedTravelToIdle
         //发现PowerCard在打出时会先停顿一小会再播放打出动画(Attack和Skill倒是会立刻播放，但其实也经历了Travel到Idle的过程，只不过随后又立刻切换了)。
@@ -338,7 +337,7 @@ public class ReplaceIroncladWithCrusaderOnCreatureUnhoverPatch
         if (__instance is not NControllerCardPlay) return;
 
         CardModel Card = Traverse.Create(__instance).Property("Card").GetValue<CardModel>();
-        if (!CrusaderHelper.IsCardOfIronclad(Card) || !CrusaderHelper.IsIronclad(Card.Owner)) return;
+        if (!CrusaderHelper.IsIronclad(Card.Owner)) return;
 
         CreatureCmd.TriggerAnim(Card.Owner.Creature, "Idle", 0);
     }

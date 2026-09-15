@@ -51900,7 +51900,7 @@ tracks/116/keys = PackedFloat32Array(0, 1, -0.002065097, -0.033650175, -0.268616
 
 [sub_resource type="Animation" id="Animation_ub0wm"]
 resource_name = "crusader_impact_onepose_action"
-length = 0.65
+length = 0.75
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
