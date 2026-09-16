@@ -1,3 +1,4 @@
+using CrusaderSkin.Code.ModConfig;
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -148,11 +149,22 @@ public static class CrusaderHelper
     }
     public static void TryPlayCombatEffect(string animName, NCreature nCreature)
     {
+        if (!CrusaderSettings.PlayCardVfx) return;
+
         bool shouldReturn = false;
         string effectPath = "";
         bool shouldBackContainer = false;
+        bool useCenterPos = true;
         switch (animName)
         {
+            case "CardPlay/Smite":
+                effectPath = "res://crusader_assets/Effects/SmiteEffect.tscn";
+                useCenterPos = false;
+                break;
+            case "CardPlay/Reap":
+                effectPath = "res://crusader_assets/Effects/ReapEffect.tscn";
+                useCenterPos = false;
+                break;
             case "CardPlay/Bulwark":
                 effectPath = "res://crusader_assets/Effects/SelfGlow.tscn";
                 shouldBackContainer = true;
@@ -160,6 +172,15 @@ public static class CrusaderHelper
             case "CardPlay/Tenacity":
                 effectPath = "res://crusader_assets/Effects/SelfGlow.tscn";
                 shouldBackContainer = true;
+                break;
+            case "CardPlay/Insp":
+                effectPath = "res://crusader_assets/Effects/BirdGlow.tscn";
+                shouldBackContainer = true;
+                useCenterPos = false;
+                break;
+            case "CardPlay/Rally":
+                effectPath = "res://crusader_assets/Effects/DustFlow.tscn";
+                useCenterPos = false;
                 break;
             default:
                 shouldReturn = true;
@@ -175,8 +196,8 @@ public static class CrusaderHelper
             parentNode.AddChild(effectNode);
 
             Marker2D centerPos = nCreature.Visuals.GetNodeOrNull<Marker2D>("%CenterPos");
-            effectNode.GlobalPosition = centerPos != null ? centerPos.GlobalPosition + GetEffectNodeOffSet(animName, nCreature) : nCreature.GlobalPosition;
-            effectNode.Scale = nCreature.Visuals.Scale;
+            effectNode.GlobalPosition = centerPos != null && useCenterPos ? centerPos.GlobalPosition + GetEffectNodeOffSet(animName, nCreature) : nCreature.GlobalPosition;
+            effectNode.Scale *= nCreature.Visuals.Scale;
         }
 
         var AnimPlayer = effectNode.GetNodeOrNull<AnimationPlayer>("%AnimationPlayer");
@@ -244,7 +265,7 @@ public static class CrusaderHelper
             case "Smite":
             case "Stun":
             case "Accus":
-            case "CardSelect/Heal":
+            case "Heal":
             case "Insp":
             case "Rally":
             case "Tenacity":

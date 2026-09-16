@@ -58,7 +58,7 @@ public static class CrusaderAnimationPatch
                 break;
 
             default:
-                if (CrusaderSettings.ShowCardAnims) 
+                if (CrusaderSettings.PlayCardAnims) 
                 {
                     PlayAnim(__instance, trigger, false, trigger.Contains("/"));
                 }
@@ -155,7 +155,7 @@ public static class CrusaderAnimationPatch
                             //必须用Start立刻传送，否则在上一张牌动画Recover阶段没结束时迅速选择下一张牌，动画会无法正确播放
                             state_machine.Start("CardSelect");
                             AR_SM.Travel(cardAnimName);
-                            if (!CrusaderSettings.MuteCardSounds)
+                            if (CrusaderSettings.PlayCardSfx)
                             {
                                 CombatAudioManager.PlayCombatSfx("CardSelect/" + cardAnimName,
                                     false, 
@@ -190,6 +190,7 @@ public static class CrusaderAnimationPatch
                             state_machine.Travel("CardPlay");
                         }
                         Attack_SM.Travel(cardAnimName);
+                        //注意，如果想把播放特效放到_stateStartedCallable中，需把_stateStartedCallable改为按Creature或者NCreature记录的字典型callable
                         CrusaderHelper.TryPlayCombatEffect(animName, node);
                     }
                 }
@@ -209,7 +210,7 @@ public static class CrusaderAnimationPatch
     private static readonly Dictionary<NCreature, Callable> _idleCallables = new();
     private static readonly Callable _stateStartedCallable = Callable.From((StringName state) =>
     {
-        if (!CrusaderSettings.MuteCardSounds)
+        if (CrusaderSettings.PlayCardSfx)
         {
             float VolumeDB = CombatAudioCfg.GetCrusaderVolumeDB("CardPlay/" + state);
             //按理来说音频可叠加，但测试发现state和state_Recover都用TempAudio播放会失真？所以区分一下
@@ -225,7 +226,7 @@ public class CrusaderSkinOnSelectedPatch
 {
     public static void Postfix(CardModel cardModel)
     {
-        if (!CrusaderSettings.ShowCardAnims) return;
+        if (!CrusaderSettings.PlayCardAnims) return;
 
         if (cardModel != null && CrusaderHelper.IsIronclad(cardModel.Owner))
         {
@@ -293,7 +294,7 @@ public class CrusaderSkinCancelPlayCardPatch
 {
     public static void Prefix(NCardPlay __instance)  //返回类型为void会继续执行原方法
     {
-        if (!CrusaderSettings.ShowCardAnims) return;
+        if (!CrusaderSettings.PlayCardAnims) return;
 
         if (!GodotObject.IsInstanceValid(__instance)) return;
 
@@ -354,7 +355,7 @@ public class CrusaderSkinAttackCommandPatch
         if (!CrusaderHelper.IsIronclad(__instance.Attacker)) return;
 
         __instance.WithNoAttackerAnim();
-        if (CrusaderSettings.ShowCardAnims && !CrusaderSettings.MuteCardSounds)
+        if (CrusaderSettings.PlayCardAnims && CrusaderSettings.PlayCardSfx)
         {
             __instance.WithHitFx(__instance.HitVfx);
         }

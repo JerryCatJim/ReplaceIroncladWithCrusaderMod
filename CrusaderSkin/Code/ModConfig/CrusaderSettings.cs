@@ -2,9 +2,10 @@ namespace CrusaderSkin.Code.ModConfig;
 
 public static class CrusaderSettings
 {
-    public static bool ShowCardAnims => RitsuLibModConfig.GetRitsuLibSettingBool("ShowCardAnims");
     public static float CardVolumeOffset => (float)RitsuLibModConfig.GetRitsuLibSettingDouble("CardVolumeOffset");
-    public static bool MuteCardSounds => RitsuLibModConfig.GetRitsuLibSettingBool("MuteCardSounds");
+    public static bool PlayCardSfx => RitsuLibModConfig.GetRitsuLibSettingBool("PlayCardSfx");
+    public static bool PlayCardAnims => RitsuLibModConfig.GetRitsuLibSettingBool("PlayCardAnims");
+    public static bool PlayCardVfx => RitsuLibModConfig.GetRitsuLibSettingBool("PlayCardVfx");
     public static bool UseLowHealthIdle => RitsuLibModConfig.GetRitsuLibSettingBool("UseLowHealthIdle");
     public static bool SwitchBannerImmediately => RitsuLibModConfig.GetRitsuLibSettingBool("SwitchBannerImmediately");
     public static bool ShowTeammateCardSelectAnim => RitsuLibModConfig.GetRitsuLibSettingBool("ShowTeammateCardSelectAnim");

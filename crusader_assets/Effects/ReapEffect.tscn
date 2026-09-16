@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dagxmugtu0kst"]
+
+[ext_resource type="Texture2D" uid="uid://cq3hrqrdk04sc" path="res://crusader_assets/Effects/EffectTexture/crusader_reap_vfx.png" id="2_yvkbb"]
+
+[sub_resource type="Animation" id="Animation_o80mp"]
+resource_name = "empty"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqhp6"]
+_data = {
+&"Show": SubResource("Animation_o80mp")
+}
+
+[node name="ReapEffect" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-60, -170)
+rotation = 0.2617994
+scale = Vector2(2, -2)
+skew = 0.6981317
+texture = ExtResource("2_yvkbb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_tqhp6")
+}

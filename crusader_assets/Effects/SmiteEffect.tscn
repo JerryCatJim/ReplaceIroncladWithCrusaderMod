@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://hg31r4y6dwuh"]
+
+[ext_resource type="Texture2D" uid="uid://cgf4h05mnk6u" path="res://crusader_assets/Effects/EffectTexture/crusader_smite_vfx.png" id="2_7y285"]
+
+[sub_resource type="Animation" id="Animation_o80mp"]
+resource_name = "empty"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.7, 0.5, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqhp6"]
+_data = {
+&"Show": SubResource("Animation_o80mp")
+}
+
+[node name="SmiteEffect" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(375, -190)
+rotation = 0.34906584
+skew = -0.61086524
+texture = ExtResource("2_7y285")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_tqhp6")
+}

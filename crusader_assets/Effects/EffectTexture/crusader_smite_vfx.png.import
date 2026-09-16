@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4686ojp7d16m"
-path.s3tc="res://.godot/imported/crusader_flame_spark.png-ba08caaa7616464eb78986fe518da842.s3tc.ctex"
+uid="uid://cgf4h05mnk6u"
+path="res://.godot/imported/crusader_smite_vfx.png-884e492b9001f6d98b008ea09f539361.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://crusader_assets/Material/crusader_flame_spark.png"
-dest_files=["res://.godot/imported/crusader_flame_spark.png-ba08caaa7616464eb78986fe518da842.s3tc.ctex"]
+source_file="res://crusader_assets/Effects/EffectTexture/crusader_smite_vfx.png"
+dest_files=["res://.godot/imported/crusader_smite_vfx.png-884e492b9001f6d98b008ea09f539361.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

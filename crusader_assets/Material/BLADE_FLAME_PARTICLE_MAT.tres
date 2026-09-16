@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://co2vvc3uojlyq"]
 
-[ext_resource type="Texture2D" uid="uid://csryjcet5wrlf" path="res://crusader_assets/Material/crusader_flame_blade.png" id="1_18nva"]
+[ext_resource type="Texture2D" uid="uid://csryjcet5wrlf" path="res://crusader_assets/Effects/EffectTexture/crusader_flame_blade.png" id="1_18nva"]
 
 [resource]
 transparency = 1

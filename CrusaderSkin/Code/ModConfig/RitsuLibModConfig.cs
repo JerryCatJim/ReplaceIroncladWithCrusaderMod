@@ -17,10 +17,11 @@ public static class RitsuLibModConfig
 
 	private static readonly Dictionary<string, object> Defaults = new Dictionary<string, object>
 	{
-		["ShowCardAnims"] = true,
 		["CardVolumeOffset"] = 0,
-		["MuteCardSounds"] = false,
-		["UseLowHealthIdle"] = true,
+		["PlayCardSfx"] = true,
+        ["PlayCardAnims"] = true,
+        ["PlayCardVfx"] = true,
+        ["UseLowHealthIdle"] = true,
 		["SwitchBannerImmediately"] = false,
 		["ShowTeammateCardSelectAnim"] = true
 	};
@@ -50,13 +51,7 @@ public static class RitsuLibModConfig
         mainPage.sortOrder = 1;
 		RLMCSection cardSfxSec = new RLMCSection();
         cardSfxSec.id = "card_sfx";
-        cardSfxSec.title = SimpleLocUtil.Simple("卡牌动画和音效", "Card Anim And Sfx");
-		ToggleEntry toggle = new ToggleEntry();
-		toggle.id = "ShowCardAnims";
-		toggle.key = toggle.id;
-        toggle.label = SimpleLocUtil.Simple("播放卡牌动画", "Show Card Anims");
-        toggle.description = SimpleLocUtil.Simple("关闭后会无法播放卡牌的选择和打出动画以及音效", "If unchecked, card select/play anims and SFX wil not play.");
-        cardSfxSec.entries.Add(toggle);
+        cardSfxSec.title = SimpleLocUtil.Simple("卡牌音效", "Card Sfx");
         SliderEntry sliderEntry = new SliderEntry();
         sliderEntry.id = "CardVolumeOffset";
         sliderEntry.key = sliderEntry.id;
@@ -66,13 +61,28 @@ public static class RitsuLibModConfig
         sliderEntry.max = 20.0;
         sliderEntry.step = 1.0;
         cardSfxSec.entries.Add(sliderEntry);
+        ToggleEntry toggle0 = new ToggleEntry();
+		toggle0.id = "PlayCardSfx";
+		toggle0.key = toggle0.id;
+        toggle0.label = SimpleLocUtil.Simple("播放卡牌音效", "Play Card Sfx");
+        toggle0.description = SimpleLocUtil.Simple("关闭后会恢复至原版游戏默认攻击音效", "If unchecked, attack cards will use the original SFX.");
+        cardSfxSec.entries.Add(toggle0);
+        RLMCSection cardVfxSec = new RLMCSection();
+        cardVfxSec.id = "card_vfx";
+        cardVfxSec.title = SimpleLocUtil.Simple("卡牌动画和特效", "Card Anim And Vfx");
+        ToggleEntry toggle1 = new ToggleEntry();
+        toggle1.id = "PlayCardAnims";
+        toggle1.key = toggle1.id;
+        toggle1.label = SimpleLocUtil.Simple("播放卡牌动画", "Play Card Anims");
+        toggle1.description = SimpleLocUtil.Simple("关闭后会无法播放卡牌的选择和打出动画,卡牌特效以及音效", "If unchecked, card select/play anims, VFX and SFX wil not play.");
+        cardVfxSec.entries.Add(toggle1);
         ToggleEntry toggle2 = new ToggleEntry();
-		toggle2.id = "MuteCardSounds";
-		toggle2.key = toggle2.id;
-        toggle2.label = SimpleLocUtil.Simple("卡牌音效静音", "Mute Card Sounds");
-        toggle2.description = SimpleLocUtil.Simple("开启后会恢复至原版游戏默认攻击音效", "If checked, attack cards will use the original SFX.");
-        cardSfxSec.entries.Add(toggle2);
-		RLMCSection animSec = new RLMCSection();
+        toggle2.id = "PlayCardVfx";
+        toggle2.key = toggle2.id;
+        toggle2.label = SimpleLocUtil.Simple("播放卡牌特效", "Play Card Vfx");
+        toggle2.description = SimpleLocUtil.Simple("关闭后会无法播放卡牌的打出特效", "If unchecked, card play VFX wil not play.");
+        cardVfxSec.entries.Add(toggle2);
+        RLMCSection animSec = new RLMCSection();
         animSec.id = "character_anim";
         animSec.title = SimpleLocUtil.Simple("角色动画", "Character Anim");
         ToggleEntry toggle3 = new ToggleEntry();
@@ -94,6 +104,7 @@ public static class RitsuLibModConfig
         toggle5.description = SimpleLocUtil.Simple("关闭后不会播放队友十字军的选卡动画", "If unchecked, teammate Crusader card select anims will not play.");
         animSec.entries.Add(toggle5);
         mainPage.sections.Add(cardSfxSec);
+        mainPage.sections.Add(cardVfxSec);
         mainPage.sections.Add(animSec);
         configEntity.pages.Add(mainPage);
 		return JsonSerializer.Serialize(configEntity);

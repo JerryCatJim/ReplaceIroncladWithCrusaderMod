@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://csryjcet5wrlf"
-path.s3tc="res://.godot/imported/crusader_flame_blade.png-fd5b1429c207cc17df5fd447f82376a9.s3tc.ctex"
+path.s3tc="res://.godot/imported/crusader_flame_blade.png-fa8203d2181e13e6cb8ee04f0c7b7883.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://crusader_assets/Material/crusader_flame_blade.png"
-dest_files=["res://.godot/imported/crusader_flame_blade.png-fd5b1429c207cc17df5fd447f82376a9.s3tc.ctex"]
+source_file="res://crusader_assets/Effects/EffectTexture/crusader_flame_blade.png"
+dest_files=["res://.godot/imported/crusader_flame_blade.png-fa8203d2181e13e6cb8ee04f0c7b7883.s3tc.ctex"]
 
 [params]
 
