@@ -129,6 +129,7 @@ public static class CrusaderAnimationPatch
                     }
                     //若处于任意Idle时则平滑切换
                     //playImmediately = !CrusaderHelper.IsInAnyIdle(animTree, node.Entity);
+                    animName = CrusaderHelper.IsHeavyHit(node.Entity) ? "HeavyHit" : animName;
                     animName = CrusaderHelper.IsLowHealth(node.Entity) && CrusaderSettings.UseLowHealthIdle ? "DeathDoor" : animName;
                 }
                 if (playImmediately)

@@ -1,6 +1,8 @@
 using CrusaderSkin.Code.ModConfig;
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Helpers;
@@ -11,6 +13,7 @@ using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using System;
+using System.Linq;
 
 namespace CrusaderSkin.Code.Helper;
 
@@ -31,6 +34,17 @@ public static class CrusaderHelper
     public static bool IsLowHealth(Creature? creature, decimal lowHealthPercent = 25m, decimal delta = 0m)
     {
         return creature != null && (creature.CurrentHp - delta) * 100m / creature.MaxHp <= lowHealthPercent;
+    }
+    public static bool IsHeavyHit(Creature? creature, decimal threshold = 30m)
+    {
+        if (creature == null) return false;
+
+        return CombatManager.Instance.History.Entries.
+            OfType<DamageReceivedEntry>().
+            LastOrDefault(e => e.Result.TotalDamage >= threshold
+            //&& e.Actor.IsMonster
+            && e.Result.UnblockedDamage > 0m
+            && e.Receiver == creature) != default;
     }
     public static void ResetAdvancedConditions(AnimationTree? animTree, Creature creature)
     {

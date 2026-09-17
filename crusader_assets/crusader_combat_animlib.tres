@@ -50254,7 +50254,7 @@ tracks/116/keys = PackedFloat32Array(0, 1, 0, 0, -0.34717873, 0.937799, 0.033333
 
 [sub_resource type="Animation" id="Animation_a8y6x"]
 resource_name = "crusader_impact_dodge"
-length = 5.9666667
+length = 0.3
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -54369,7 +54369,7 @@ tracks/116/keys = PackedFloat32Array(0, 1, 0, 0, -0.38732618, 0.9219428, 0.55583
 
 [sub_resource type="Animation" id="Animation_pqgjw"]
 resource_name = "crusader_impact_recover"
-length = 5.966667
+length = 3.0
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
