@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cu8830pbdj284"]
 
-[ext_resource type="Script" uid="uid://br868w5ykpmw4" path="res://ReplaceIroncladWithCrusader/Code/Nodes/EmptyNRestSiteCharacter.cs" id="1_r7lhj"]
+[ext_resource type="Script" uid="uid://br868w5ykpmw4" path="res://CrusaderSkin/Code/Nodes/EmptyNRestSiteCharacter.cs" id="1_r7lhj"]
 [ext_resource type="PackedScene" uid="uid://btkltig43hm46" path="res://crusader_assets/mdl_crusader.tscn" id="2_dnqdo"]
 [ext_resource type="AnimationLibrary" uid="uid://bj8ros5grvlxa" path="res://crusader_assets/crusader_restsite_animlib.tres" id="3_16bta"]
 [ext_resource type="PackedScene" uid="uid://cftw6csox0fhd" path="res://scenes/rest_site/characters/selection_reticle.tscn" id="4_r7lhj"]
@@ -18,7 +18,7 @@ sky = SubResource("Sky_g6hy6")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Ironclad" type="Node2D"]
+[node name="IroncladRestSite" type="Node2D"]
 position = Vector2(-2, 42)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_r7lhj")
@@ -105,7 +105,10 @@ fov = 30.0
 near = 0.001
 
 [node name="mdl_crusader" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport" instance=ExtResource("2_dnqdo")]
-transform = Transform3D(51.99267, -4.786988, 85.28686, 36.89155, 91.309784, -17.36482, -77.04399, 40.492077, 49.240383, 0, 0, 0)
+transform = Transform3D(0.51992667, -0.04786986, 0.85286856, 0.36891547, 0.91309786, -0.17364822, -0.7704399, 0.40492076, 0.49240384, 0, 0, 0)
+
+[node name="mdl_crusader (merge)" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader" index="0"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 
 [node name="Skeleton3D" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader/mdl_crusader (merge)/mdl_crusader/SHJntGrp" index="0"]
 bones/0/position = Vector3(0.13402484, 0, 0)
@@ -113,10 +116,7 @@ bones/1/position = Vector3(-0.17285605, 0.6957411, 0.097550936)
 bones/1/rotation = Quaternion(0.55350757, 0.5331542, -0.45302957, -0.45181888)
 bones/2/position = Vector3(-0.8351854, -7.0964465, -1.4987456)
 bones/2/rotation = Quaternion(0.5535075, 0.53315425, -0.45302957, 0.45181894)
-bones/13/position = Vector3(-0.09505176, -0.19130634, -0.04866328)
 bones/13/rotation = Quaternion(-0.0323914, -0.021660361, 0.9960772, -0.079447694)
-bones/14/rotation = Quaternion(0, 0, 0, 1)
-bones/15/rotation = Quaternion(0, 0, 0, 1)
 bones/16/rotation = Quaternion(0.393078, 0.37311557, -0.5631903, 0.6237717)
 bones/17/rotation = Quaternion(-0.23786682, 0.5645385, -0.4918395, 0.61871606)
 bones/18/rotation = Quaternion(1.04083425e-17, 0.6045932, -6.938895e-18, 0.79653454)
@@ -154,11 +154,8 @@ bones/44/rotation = Quaternion(5.5511148e-17, -1.6653344e-16, -0.08954858, 0.995
 bones/45/rotation = Quaternion(-0.027801353, 0.10468742, -0.113883674, 0.98757184)
 bones/46/position = Vector3(0.12768508, 1.7763569e-16, 1.0658141e-16)
 bones/46/rotation = Quaternion(-0.015111769, -0.0016812623, -0.22917852, 0.97326565)
-bones/49/position = Vector3(0.11173622, -0.17455134, 0.00073554664)
-bones/49/rotation = Quaternion(0, -2.7561814e-26, 0.999472, -0.032492306)
 bones/50/rotation = Quaternion(0.06307314, 0.0020504743, 0.9974798, -0.032427534)
 bones/51/position = Vector3(0.06686788, -2.557954e-15, -2.842171e-16)
-bones/51/rotation = Quaternion(0, 0, 0, 1)
 bones/52/position = Vector3(0.11803759, 0.075692564, -0.13446091)
 bones/52/rotation = Quaternion(0.44501054, 0.36090967, -0.5137498, 0.6385695)
 bones/53/rotation = Quaternion(-0.18214467, -0.2558364, -0.3694498, 0.87457305)
@@ -181,7 +178,6 @@ bones/68/rotation = Quaternion(-3.2092384e-17, 6.938894e-18, -0.09135707, 0.9958
 bones/69/rotation = Quaternion(-0.19249466, 0.018496575, -0.4099342, 0.8913797)
 bones/70/rotation = Quaternion(2.0816682e-17, 5.551115e-17, -0.316195, 0.9486942)
 bones/71/rotation = Quaternion(2.8449468e-16, 5.551116e-17, -0.37048116, 0.92884)
-bones/73/position = Vector3(-0.1501337, 0.026253618, 0.011048473)
 bones/73/rotation = Quaternion(-0.077577904, 0.014679525, 0.5187705, 0.8512599)
 bones/77/rotation = Quaternion(-0.029848997, 0.032565836, -0.0054991837, 0.99900866)
 bones/78/position = Vector3(0.09969295, 0.009376247, -3.899917e-09)
@@ -194,7 +190,6 @@ bones/83/rotation = Quaternion(0.19555302, 0.26369053, -0.24566168, 0.9120728)
 bones/84/rotation = Quaternion(0.7747202, -0.43230253, 0.15267394, 0.43544677)
 bones/85/rotation = Quaternion(-0.23882043, -0.12592645, -0.33733547, 0.9018382)
 bones/86/rotation = Quaternion(-0.0032042442, 0.01446404, -0.5925912, 0.8053671)
-bones/87/position = Vector3(-0.11331685, -0.0021099471, -0.04531195)
 bones/87/rotation = Quaternion(0.03612699, 0.025759248, -0.21705148, 0.9751513)
 bones/88/rotation = Quaternion(9.7144515e-17, 0, -0.40949005, 0.9123146)
 bones/89/rotation = Quaternion(-1.5265567e-16, 2.220446e-16, -0.588086, 0.80879843)
@@ -202,7 +197,6 @@ bones/90/position = Vector3(-0.10869853, -0.010076898, -0.010031735)
 bones/90/rotation = Quaternion(-0.012252634, 0.006161939, -0.6123746, 0.79044884)
 bones/91/rotation = Quaternion(-0.0132789705, -0.015822304, -0.61817765, 0.7857671)
 bones/92/rotation = Quaternion(-0.019024398, 0.0067544356, -0.5558674, 0.8310259)
-bones/93/position = Vector3(-0.10171952, -0.006178439, 0.022763219)
 bones/93/rotation = Quaternion(-0.0041341106, -0.06382713, -0.6285622, 0.7751249)
 bones/94/rotation = Quaternion(-0.029757963, 0.023685612, -0.5070787, 0.8610602)
 bones/95/rotation = Quaternion(7.1991024e-17, 0, -0.7829079, 0.62213767)
@@ -212,25 +206,11 @@ bones/97/rotation = Quaternion(2.7755576e-17, 0, -0.47298065, 0.8810729)
 bones/98/rotation = Quaternion(0.01694261, -0.029146982, -0.7573791, 0.6521045)
 bones/100/position = Vector3(0.15253155, -0.04209782, -0.0021108976)
 bones/100/rotation = Quaternion(-0.28050718, 0.16511734, 0.49655548, 0.80466443)
-bones/101/rotation = Quaternion(3.3087225e-24, -6.617445e-24, -0.5848792, 0.8111204)
-bones/102/rotation = Quaternion(0, 0, 0, 1)
 bones/104/position = Vector3(0.22545624, -0.3329088, -0.27518025)
 bones/104/rotation = Quaternion(0.47113404, -0.06444423, -0.8209228, 0.31617326)
 
-[node name="l_Leg_ToeSHJnt" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader/mdl_crusader (merge)/mdl_crusader/SHJntGrp/Skeleton3D" index="0"]
-transform = Transform3D(0.27788424, 0.9606148, 6.6980397e-06, -2.2292137e-05, -6.908722e-07, 1, 0.9606148, -0.27788422, 2.1300695e-05, 0.40866244, 1.7881393e-06, 0.6624137)
-
-[node name="r_Leg_ToeSHJnt" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader/mdl_crusader (merge)/mdl_crusader/SHJntGrp/Skeleton3D" index="1"]
-transform = Transform3D(0.45515227, 0.8890401, -0.0494406, -0.013709287, -0.048522018, -0.9987281, -0.89030826, 0.45525104, -0.009896847, -0.5076493, 0.007821605, 0.47215295)
-
-[node name="l_Prop_AuxSHJnt" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader/mdl_crusader (merge)/mdl_crusader/SHJntGrp/Skeleton3D" index="2"]
-transform = Transform3D(-0.8926702, -0.248532, -0.3759943, -0.44819242, 0.5775448, 0.68232393, 0.047574267, 0.77760804, -0.62694716, 0.068951935, 0.63826513, 0.5761602)
-
-[node name="r_Prop_AuxSHJnt" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader/mdl_crusader (merge)/mdl_crusader/SHJntGrp/Skeleton3D" index="3"]
-transform = Transform3D(-0.11496478, 0.05764161, -0.99169594, 0.9747436, -0.18587044, -0.12380314, -0.19146296, -0.9808822, -0.034817144, -0.24235669, 0.6255761, 0.43475342)
-
 [node name="BladeAttachment" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader/mdl_crusader (merge)/mdl_crusader/SHJntGrp/Skeleton3D" index="9"]
-transform = Transform3D(0.6081922, -0.53052324, -0.59046394, -0.35505822, 0.48347658, -0.8001152, 0.709955, 0.6962728, 0.10567999, 0.17628832, 0.9241255, 0.47030714)
+transform = Transform3D(-0.7073025, -0.7017016, -0.085663065, -0.40379527, 0.50050604, -0.7657958, 0.58023494, -0.507059, -0.63735306, -0.429498, 1.1598041, 0.1811823)
 
 [node name="BladeFlameLeft" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader/mdl_crusader (merge)/mdl_crusader/SHJntGrp/Skeleton3D/BladeAttachment" index="0"]
 emitting = false
@@ -239,6 +219,9 @@ emitting = false
 emitting = false
 
 [node name="BladeGlowBody" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader/mdl_crusader (merge)/mdl_crusader/SHJntGrp/Skeleton3D/BladeAttachment" index="2"]
+visible = false
+
+[node name="ShadowNode" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport/mdl_crusader" index="2"]
 visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="ControlRoot/Visuals/SubViewportContainer/SubViewport"]
