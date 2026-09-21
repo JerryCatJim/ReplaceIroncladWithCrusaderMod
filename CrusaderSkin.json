@@ -3,7 +3,7 @@
 "name": "CrusaderSkin",
 "author": "Jerry",
 "description": "Replace Ironclad With Crusader.",
-"version": "0.1.1",
+"version": "0.1.2",
 "has_pck": true,
 "has_dll": true,
 "min_game_version": "0.107.0",

@@ -19,8 +19,7 @@ public class CrusaderRunstateSingleton : CustomCrusaderSingletonModel
             {
                 if (CrusaderHelper.IsIronclad(creature))
                 {
-                    CrusaderHelper.SetBannerAndScriptureVisibility(creature.GetCreatureNode(), "Idle");
-                    CrusaderHelper.SetBladeFlameVisibility(creature.GetCreatureNode(), "Idle");
+                    CrusaderHelper.InitCrusaderVisualAfterCombatStart(null, creature);
                 }
             }
         }

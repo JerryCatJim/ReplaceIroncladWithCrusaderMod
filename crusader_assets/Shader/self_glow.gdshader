@@ -8,7 +8,7 @@ uniform float global_intensity : hint_range(0.0, 6.0) = 1.0;
 
 // ============ 中心核心 ============
 uniform vec4 core_color : source_color = vec4(1.0, 0.97, 0.88, 1.0);
-uniform float core_size : hint_range(0.0, 0.8) = 0.10;
+uniform float core_size : hint_range(0.0, 0.8) = 0.05;
 uniform float core_power : hint_range(0.5, 16.0) = 3.0;
 uniform float core_intensity : hint_range(0.0, 10.0) = 2.5;
 

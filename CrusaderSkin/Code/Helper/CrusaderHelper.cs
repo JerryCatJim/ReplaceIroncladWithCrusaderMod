@@ -66,6 +66,7 @@ public static class CrusaderHelper
             }
             else*/
             {
+                //用进入Idle的信号来控制站立动画了，条件控制暂时没用了
                 animationTree.Set("parameters/conditions/HitToIdle", true);
                 animationTree.Set("parameters/conditions/HitToDeathIdle", false);
             }
@@ -93,6 +94,34 @@ public static class CrusaderHelper
             }
         }
         return false;
+    }
+    public static void InitCrusaderVisualAfterCombatStart(AnimationTree? tree, Creature creature)
+    {
+        AnimationTree? animationTree = tree;
+        NCreature? creatureNode = null;
+        if (animationTree == null && creature != null)
+        {
+            creatureNode = creature.GetCreatureNode();
+            if (creatureNode != null)
+            {
+                animationTree = creatureNode.Visuals.GetNodeOrNull<AnimationTree>("AnimationTree");
+            }
+        }
+        if (animationTree != null && creatureNode != null)
+        {
+            var state_machine = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
+            if (state_machine != null)
+            {
+                var Idle_SM = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/Idle/playback");
+                if (Idle_SM != null && IsLowHealth(creatureNode.Entity) && CrusaderSettings.UseLowHealthIdle)
+                {
+                    state_machine.Start("Idle");
+                    Idle_SM.Travel("DeathIdle");
+                }
+            }
+            SetBannerAndScriptureVisibility(creatureNode, "Idle");
+            SetBladeFlameVisibility(creatureNode, "Idle");
+        }
     }
     public static void SetBannerAndScriptureVisibility(NCreature nCreature, string animName)
     {
@@ -165,7 +194,6 @@ public static class CrusaderHelper
     {
         if (!CrusaderSettings.PlayCardVfx) return;
 
-        bool shouldReturn = false;
         string effectPath = "";
         bool shouldBackContainer = false;
         bool useCenterPos = true;
@@ -197,10 +225,8 @@ public static class CrusaderHelper
                 useCenterPos = false;
                 break;
             default:
-                shouldReturn = true;
-                break;
+                return;
         }
-        if (shouldReturn) return;
         Node2D effectNode = PreloadManager.Cache.GetScene(effectPath).Instantiate<Node2D>();
         if (effectNode == null) return;
 
@@ -212,6 +238,11 @@ public static class CrusaderHelper
             Marker2D centerPos = nCreature.Visuals.GetNodeOrNull<Marker2D>("%CenterPos");
             effectNode.GlobalPosition = centerPos != null && useCenterPos ? centerPos.GlobalPosition + GetEffectNodeOffSet(animName, nCreature) : nCreature.GlobalPosition;
             effectNode.Scale *= nCreature.Visuals.Scale;
+            if (!shouldBackContainer)
+            {
+                //挂在BackCombatVfxContainer的特效无需注意镜头缩放
+                effectNode.Scale *= nCreature.Entity.CombatState.Encounter.GetCameraScaling();
+            }
         }
 
         var AnimPlayer = effectNode.GetNodeOrNull<AnimationPlayer>("%AnimationPlayer");
@@ -244,12 +275,12 @@ public static class CrusaderHelper
         switch (animName)
         {
             case "CardPlay/Bulwark":
-                offSetScaleX = 1.0f;
-                offSetScaleY = -2.8f;
+                offSetScaleX = 1.2f;
+                offSetScaleY = -2.5f;
                 break;
             case "CardPlay/Tenacity":
                 offSetScaleX = 0.0f;
-                offSetScaleY = -2.8f;
+                offSetScaleY = -2.5f;
                 break;
             default:
                 break;
