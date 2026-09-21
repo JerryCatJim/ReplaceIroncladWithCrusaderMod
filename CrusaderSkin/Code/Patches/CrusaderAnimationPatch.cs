@@ -122,9 +122,15 @@ public static class CrusaderAnimationPatch
 
                 if (animName == "Hit")
                 {
+                    //有人反馈连续挨打容易触发T姿势，我没遇到过，还是限制一下吧
                     if (state_machine.GetCurrentNode() == "Hit" || state_machine.GetCurrentNode() == "HitRecover" || state_machine.GetCurrentNode() == "DeathDoor")
                     {
-                        //有人反馈连续挨打容易触发T姿势，我没遇到过，还是限制一下吧
+                        if ((state_machine.GetCurrentNode() == "Hit" || state_machine.GetCurrentNode() == "HitRecover")
+                            && CrusaderHelper.IsLowHealth(node.Entity) && CrusaderSettings.UseLowHealthIdle)
+                        {
+                            //被连击击中，第一击是健康血量，后续连击导致低血量时，立刻播放低血量受击动画
+                            state_machine.Start("DeathDoor");
+                        }
                         return;
                     }
                     //若处于任意Idle时则平滑切换
