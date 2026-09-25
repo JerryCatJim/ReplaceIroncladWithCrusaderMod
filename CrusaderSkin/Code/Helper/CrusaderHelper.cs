@@ -238,6 +238,11 @@ public static class CrusaderHelper
             Marker2D centerPos = nCreature.Visuals.GetNodeOrNull<Marker2D>("%CenterPos");
             effectNode.GlobalPosition = centerPos != null && useCenterPos ? centerPos.GlobalPosition + GetEffectNodeOffSet(animName, nCreature) : nCreature.GlobalPosition;
             effectNode.Scale *= nCreature.Visuals.Scale;
+            if (nCreature.Visuals.GetNodeOrNull<Node2D>("%Visuals") is Node2D visualsNode && visualsNode.Scale.X < 0)
+            {
+                //人物转身时特效也翻转
+                effectNode.Scale *= new Vector2(-1, 1);
+            }
             if (!shouldBackContainer)
             {
                 //挂在BackCombatVfxContainer的特效无需注意镜头缩放
